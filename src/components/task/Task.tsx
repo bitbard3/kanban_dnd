@@ -1,13 +1,11 @@
 import React from "react";
-import { LuCalendar } from "react-icons/lu";
 import Dnd from "./Dnd";
 import Edit from "./Edit";
 import Title from "./Title";
 import Desc from "./Desc";
 import Footer from "./Footer";
 import Priority from "./Priority";
-
-type PriorityLevel = "p0" | "p1" | "p2";
+import { PriorityLevel } from "@/interface/priority";
 
 type TaskProps = {
   title: string;
