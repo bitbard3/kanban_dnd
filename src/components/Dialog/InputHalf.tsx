@@ -1,5 +1,5 @@
 import React from "react";
-import { DialogInputProps } from "../DialogInputFull";
+import { DialogInputProps } from "./InputFull";
 
 export default function DialogInputHalf({
   label,
