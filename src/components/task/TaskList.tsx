@@ -33,6 +33,12 @@ export default function TaskList({ status }: TaskListProps) {
     );
   }
 
+  if (nameFilterOption) {
+    filteredTasks = filteredTasks.filter((task) =>
+      task.assignee.toLowerCase().includes(nameFilterOption.toLowerCase())
+    );
+  }
+
   return (
     <>
       {filteredTasks.map((task) => (
