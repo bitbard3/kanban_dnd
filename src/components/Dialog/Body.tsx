@@ -105,7 +105,7 @@ export default function DialogBody({ handleDialogToggle }: DialogBodyProps) {
                 label="Assignee"
                 placeholder="Ansh"
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setTask({ ...task, assignee: e.target.value })
+                  setTask({ ...task, assignee: e.target.value.toLowerCase() })
                 }
               />
               <DialogInputHalf

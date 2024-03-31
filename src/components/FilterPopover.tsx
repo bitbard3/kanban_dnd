@@ -1,11 +1,26 @@
 import React, { useState } from "react";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRecoilState } from "recoil";
-import { nameFilter, priorityFilter } from "@/stores/atoms/filter";
+import {
+  endDateFilter,
+  nameFilter,
+  priorityFilter,
+  startDateFilter,
+} from "@/stores/atoms/filter";
 import { VscChromeClose } from "react-icons/vsc";
 import { IoIosSearch } from "react-icons/io";
 
 export default function FilterPopover() {
+  const [startDate, setStartDate] = useRecoilState(startDateFilter);
+  const [endDate, setEndDate] = useRecoilState(endDateFilter);
   const [priorityFilterOption, setPriorityFilter] =
     useRecoilState(priorityFilter);
   const [nameFilterOption, setNameFilter] = useRecoilState(nameFilter);
@@ -77,6 +92,58 @@ export default function FilterPopover() {
               <IoIosSearch className="h-5 w-5 text-neutral-500" />
             </button>
           </div>
+        </div>
+        <div className="flex items-center mt-7 border-b-2 border-neutral-200 pb-5 justify-between">
+          <p className="text-stone-950">From</p>
+          <Popover>
+            <PopoverTrigger asChild>
+              <div
+                className={cn(
+                  "w-2/3 border flex items-center text-sm py-2 border-black rounded-md pl-2",
+                  !startDate && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {startDate ? (
+                  format(startDate, "PPP")
+                ) : (
+                  <span>Pick a date</span>
+                )}
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={startDate}
+                onSelect={setStartDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
+        <div className="flex items-center mt-7 border-b-2 border-neutral-200 pb-5 justify-between">
+          <p className="text-stone-950">To</p>
+          <Popover>
+            <PopoverTrigger asChild>
+              <div
+                className={cn(
+                  "w-2/3 border flex items-center text-sm py-2 border-black rounded-md pl-2",
+                  !endDate && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {endDate ? format(endDate, "PPP") : <span>Pick a date</span>}
+              </div>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={endDate}
+                onSelect={setEndDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
     </div>

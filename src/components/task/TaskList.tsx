@@ -9,7 +9,12 @@ import {
   pending,
   progress,
 } from "@/stores/atoms/task";
-import { nameFilter, priorityFilter } from "@/stores/atoms/filter";
+import {
+  endDateFilter,
+  nameFilter,
+  priorityFilter,
+  startDateFilter,
+} from "@/stores/atoms/filter";
 
 type TaskListProps = {
   status: Status;
@@ -26,17 +31,39 @@ export default function TaskList({ status }: TaskListProps) {
   const tasks = tasksByStatus[status];
   const priorityFilterOption = useRecoilValue(priorityFilter);
   const nameFilterOption = useRecoilValue(nameFilter);
+  const startDate = useRecoilValue(startDateFilter);
+  const endDate = useRecoilValue(endDateFilter);
   let filteredTasks = tasks;
+
+  // Filter tasks by priority if priority is provided
   if (priorityFilterOption) {
     filteredTasks = filteredTasks.filter(
       (task) => task.priority === priorityFilterOption
     );
   }
 
+  // Filter tasks by name if assignee is provided
   if (nameFilterOption) {
     filteredTasks = filteredTasks.filter((task) =>
-      task.assignee.toLowerCase().includes(nameFilterOption.toLowerCase())
+      task.title.toLowerCase().includes(nameFilterOption.toLowerCase())
     );
+  }
+
+  // Filter tasks by start date if only startDate is provided
+  if (startDate) {
+    filteredTasks = filteredTasks.filter((task) => {
+      const taskStartDate = new Date(task.startDate);
+      return taskStartDate >= startDate;
+    });
+  }
+
+  // Filter tasks by start date if both startDate and endDate are provided
+  if (startDate && endDate) {
+    endDate.setHours(23, 59, 59, 999);
+    filteredTasks = filteredTasks.filter((task) => {
+      const taskStartDate = new Date(task.startDate);
+      return taskStartDate >= startDate && taskStartDate <= endDate;
+    });
   }
 
   return (
