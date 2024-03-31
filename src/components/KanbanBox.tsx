@@ -1,12 +1,16 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import Task from "./task/Task";
+import TaskList from "./task/TaskList";
+import { Status } from "@/interface/status";
 
 type KanbanBoxProps = {
   title: string;
   box: string;
+  status: Status;
 };
 
-export default function KanbanBox({ title, box }: KanbanBoxProps) {
+export default function KanbanBox({ title, box, status }: KanbanBoxProps) {
   return (
     <>
       <div className="flex flex-col h-full w-[18%] space-y-5">
@@ -16,7 +20,9 @@ export default function KanbanBox({ title, box }: KanbanBoxProps) {
             {title}
           </h3>
         </div>
-        <div className="h-[80%] kanban-box w-full rounded-[2rem] border-[1px] border-black bg-white"></div>
+        <div className="h-[80%] pt-3 kanban-box w-full rounded-[2rem] border-[1px] border-black bg-white flex flex-col items-center overflow-scroll pb-8 no-scrollbar">
+          <TaskList status={status} />
+        </div>
       </div>
     </>
   );

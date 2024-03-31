@@ -23,7 +23,7 @@ export default function Task({
   assignee,
 }: TaskProps) {
   return (
-    <div className="w-[90%] border-black border bg-[#fff2ba] flex flex-col px-3 rounded-lg py-5">
+    <div className="w-[90%] border-black border mt-5 bg-[#fff2ba] flex flex-col px-3 rounded-lg py-5">
       <div className="flex items-center">
         <Priority priority={priority} />
         <div className="flex items-center space-x-1 ml-auto mr-1">

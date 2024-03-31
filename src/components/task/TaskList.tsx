@@ -9,6 +9,7 @@ import {
   pending,
   progress,
 } from "@/stores/atoms/task";
+import { nameFilter, priorityFilter } from "@/stores/atoms/filter";
 
 type TaskListProps = {
   status: Status;
@@ -23,9 +24,18 @@ export default function TaskList({ status }: TaskListProps) {
     deferred: useRecoilValue(deferred),
   };
   const tasks = tasksByStatus[status];
+  const priorityFilterOption = useRecoilValue(priorityFilter);
+  const nameFilterOption = useRecoilValue(nameFilter);
+  let filteredTasks = tasks;
+  if (priorityFilterOption) {
+    filteredTasks = filteredTasks.filter(
+      (task) => task.priority === priorityFilterOption
+    );
+  }
+
   return (
     <>
-      {tasks.map((task) => (
+      {filteredTasks.map((task) => (
         <Task
           title={task.title}
           description={task.description}
