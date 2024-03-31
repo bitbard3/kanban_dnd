@@ -7,11 +7,11 @@ import Footer from "./Footer";
 import Priority from "./Priority";
 import { PriorityLevel } from "@/interface/priority";
 
-type TaskProps = {
+export type TaskProps = {
   title: string;
   description: string;
   priority: PriorityLevel;
-  date: string;
+  date: Date | undefined;
   assignee: string;
 };
 
