@@ -1,6 +1,5 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import Task from "./task/Task";
 import TaskList from "./task/TaskList";
 import { Status } from "@/interface/status";
 
@@ -13,7 +12,7 @@ type KanbanBoxProps = {
 export default function KanbanBox({ title, box, status }: KanbanBoxProps) {
   return (
     <>
-      <div className="flex flex-col h-full w-[18%] space-y-5">
+      <div className="flex flex-col h-full px-5 min-w-[100%] md:min-w-[50%] lg:min-w-[40%] xl:min-w-[18%] xl:px-0  space-y-5">
         <div className="flex items-center justify-center space-x-2">
           <div className={cn("h-6 w-6 rounded-full", box)}></div>
           <h3 className="text-black text-opacity-80 text-2xl font-semibold">
