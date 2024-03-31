@@ -11,12 +11,12 @@ export const nameFilter = atom<string | null>({
   default: null,
 });
 
-export const startDateFilter = atom<Date | null>({
+export const startDateFilter = atom<Date | undefined>({
   key: "startDateFilter",
-  default: null,
+  default: undefined,
 });
 
-export const endDateFilter = atom<Date | null>({
+export const endDateFilter = atom<Date | undefined>({
   key: "endDateFilter",
-  default: null,
+  default: undefined,
 });
