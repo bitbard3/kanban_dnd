@@ -4,13 +4,19 @@ import { useRecoilState } from "recoil";
 import { taskAtom } from "@/stores/atoms/task";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import EditDialog from "./EditDialog";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function EditPopover({ id }: { id: string }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [task, setTask] = useRecoilState(taskAtom);
+  const { toast } = useToast();
   const deleteHandler = () => {
     const taskToRemove = task.find((task) => task.id == id);
     if (taskToRemove?.status == "completed") {
+      toast({
+        variant: "destructive",
+        description: "Completed tasks cannot be deleted!",
+      });
       return;
     }
     setTask(task.filter((task) => task.id != id));

@@ -16,6 +16,7 @@ import { useRecoilState } from "recoil";
 import { Status } from "@/interface/status";
 import { v4 as uuidv4 } from "uuid";
 import { taskAtom } from "@/stores/atoms/task";
+import { useToast } from "@/components/ui/use-toast";
 
 interface DialogBodyProps {
   handleDialogToggle: () => void;
@@ -32,13 +33,22 @@ export default function DialogBody({ handleDialogToggle }: DialogBodyProps) {
     status: "pending",
     startDate: new Date(),
   });
+  const { toast } = useToast();
   const [tasks, setTaskAtom] = useRecoilState(taskAtom);
 
   const handleCreateTask = () => {
     if (!task.title || !task.description || !task.assignee || !task.team) {
+      toast({
+        variant: "destructive",
+        description: "Some feilds are empty!",
+      });
       return;
     }
     setTaskAtom([...tasks, task]);
+    toast({
+      variant: "success",
+      description: "Task Added!",
+    });
     setTask({
       id: uuidv4(),
       title: "",
