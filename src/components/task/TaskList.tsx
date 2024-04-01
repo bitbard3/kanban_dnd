@@ -33,7 +33,7 @@ export default function TaskList({ status }: TaskListProps) {
   // Filter tasks by name if assignee is provided
   if (nameFilterOption) {
     filteredTasks = filteredTasks.filter((task) =>
-      task.title.toLowerCase().includes(nameFilterOption.toLowerCase())
+      task.assignee.toLowerCase().includes(nameFilterOption.toLowerCase())
     );
   }
 

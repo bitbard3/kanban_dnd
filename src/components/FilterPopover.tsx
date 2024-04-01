@@ -75,7 +75,7 @@ export default function FilterPopover() {
           <p className="text-stone-950">Assignee</p>
           <div className="w-2/3 rounded-md flex items-center border border-black">
             <input
-              onChange={(e) => setasigneeFilter(e.target.value)}
+              onChange={(e) => setasigneeFilter(e.target.value.toLowerCase())}
               type="text"
               className="pl-2 w-[80%] focus:outline-none py-1.5 placeholder:text-neutral-500 placeholder:text-sm text-sm  rounded-md"
               placeholder="Ansh"
