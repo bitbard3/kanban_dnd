@@ -46,7 +46,7 @@ export default function Task({
         <Priority priority={priority} />
         <div className="flex items-center space-x-1 ml-auto mr-1">
           <Dnd onDragStart={handleDragStart} />
-          <Edit />
+          <Edit id={id} />
         </div>
       </div>
       <Title title={title} />

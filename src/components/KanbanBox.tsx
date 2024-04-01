@@ -14,7 +14,6 @@ type KanbanBoxProps = {
 
 export default function KanbanBox({ title, box, status }: KanbanBoxProps) {
   const [task, setTask] = useRecoilState(taskAtom);
-  console.log(task);
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const id = e.dataTransfer.getData("id");

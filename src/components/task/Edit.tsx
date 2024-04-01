@@ -1,10 +1,18 @@
 import React from "react";
-import { HiMiniEllipsisVertical } from "react-icons/hi2";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 
-export default function Edit() {
+import { HiMiniEllipsisVertical } from "react-icons/hi2";
+import EditPopover from "../EditPopover";
+
+export default function Edit({ id }: { id: string }) {
   return (
-    <button className="">
-      <HiMiniEllipsisVertical className=" text-neutral-900 h-5 w-5" />
-    </button>
+    <Popover>
+      <PopoverTrigger>
+        <div className="">
+          <HiMiniEllipsisVertical className=" text-neutral-900 h-5 w-5" />
+        </div>
+      </PopoverTrigger>
+      <EditPopover id={id} />
+    </Popover>
   );
 }
