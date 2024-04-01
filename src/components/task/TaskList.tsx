@@ -2,13 +2,7 @@ import { Status } from "@/interface/status";
 import React from "react";
 import Task, { TaskProps } from "./Task";
 import { useRecoilValue } from "recoil";
-import {
-  completed,
-  deferred,
-  deployed,
-  pending,
-  progress,
-} from "@/stores/atoms/task";
+import { taskAtom } from "@/stores/atoms/task";
 import {
   endDateFilter,
   nameFilter,
@@ -21,19 +15,13 @@ type TaskListProps = {
 };
 
 export default function TaskList({ status }: TaskListProps) {
-  const tasksByStatus = {
-    pending: useRecoilValue(pending),
-    progress: useRecoilValue(progress),
-    completed: useRecoilValue(completed),
-    deployed: useRecoilValue(deployed),
-    deferred: useRecoilValue(deferred),
-  };
-  const tasks = tasksByStatus[status];
+  const tasks = useRecoilValue(taskAtom);
   const priorityFilterOption = useRecoilValue(priorityFilter);
   const nameFilterOption = useRecoilValue(nameFilter);
   const startDate = useRecoilValue(startDateFilter);
   const endDate = useRecoilValue(endDateFilter);
   let filteredTasks = tasks;
+  filteredTasks = filteredTasks.filter((task) => task.status === status);
 
   // Filter tasks by priority if priority is provided
   if (priorityFilterOption) {
@@ -70,6 +58,9 @@ export default function TaskList({ status }: TaskListProps) {
     <>
       {filteredTasks.map((task) => (
         <Task
+          key={task.id}
+          status={task.status}
+          id={task.id}
           title={task.title}
           description={task.description}
           priority={task.priority}

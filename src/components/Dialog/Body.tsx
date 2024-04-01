@@ -13,14 +13,9 @@ import DialogInputHalf from "./InputHalf";
 import { Task } from "@/interface/task";
 import { PriorityLevel } from "@/interface/priority";
 import { useRecoilState } from "recoil";
-import {
-  completed,
-  deferred,
-  deployed,
-  pending,
-  progress,
-} from "@/stores/atoms/task";
 import { Status } from "@/interface/status";
+import { v4 as uuidv4 } from "uuid";
+import { taskAtom } from "@/stores/atoms/task";
 
 interface DialogBodyProps {
   handleDialogToggle: () => void;
@@ -28,7 +23,7 @@ interface DialogBodyProps {
 
 export default function DialogBody({ handleDialogToggle }: DialogBodyProps) {
   const [task, setTask] = useState<Task>({
-    id: undefined,
+    id: uuidv4(),
     title: "",
     description: "",
     assignee: "",
@@ -37,38 +32,15 @@ export default function DialogBody({ handleDialogToggle }: DialogBodyProps) {
     status: "pending",
     startDate: new Date(),
   });
-
-  const [pendingTasks, setPendingTasks] = useRecoilState(pending);
-  const [progressTasks, setProgressTasks] = useRecoilState(progress);
-  const [completedTasks, setCompletedTasks] = useRecoilState(completed);
-  const [deployedTasks, setDeployedTasks] = useRecoilState(deployed);
-  const [deferredTasks, setDeferredTasks] = useRecoilState(deferred);
+  const [tasks, setTaskAtom] = useRecoilState(taskAtom);
 
   const handleCreateTask = () => {
     if (!task.title || !task.description || !task.assignee || !task.team) {
       return;
     }
-    switch (task.status) {
-      case "pending":
-        setPendingTasks([...pendingTasks, task]);
-        break;
-      case "progress":
-        setProgressTasks([...progressTasks, task]);
-        break;
-      case "completed":
-        setCompletedTasks([...completedTasks, task]);
-        break;
-      case "deployed":
-        setDeployedTasks([...deployedTasks, task]);
-        break;
-      case "deferred":
-        setDeferredTasks([...deferredTasks, task]);
-        break;
-      default:
-        console.error("Invalid status");
-    }
+    setTaskAtom([...tasks, task]);
     setTask({
-      id: undefined,
+      id: uuidv4(),
       title: "",
       description: "",
       assignee: "",
