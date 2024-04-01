@@ -2,7 +2,7 @@ import { PriorityLevel } from "./priority";
 import { Status } from "./status";
 
 export interface Task {
-  id?: string;
+  id: string;
   title: string;
   description: string;
   assignee: string;
