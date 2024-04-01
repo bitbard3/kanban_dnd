@@ -56,7 +56,7 @@ export default function DialogBody({ handleDialogToggle }: DialogBodyProps) {
     <DialogContent>
       <div className="flex flex-col">
         <p className="text-black text-xl font-medium">Add task</p>
-        <div className="mt-7 border border-black py-5 rounded-lg">
+        <div className="mt-7 border border-black pb-5 rounded-lg">
           <div className="flex flex-col w-full ">
             <DialogInputFull
               label="Title"

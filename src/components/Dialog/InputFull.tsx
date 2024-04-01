@@ -16,7 +16,7 @@ export default function DialogInputFull({
   disable,
 }: DialogInputProps) {
   return (
-    <div className="flex flex-col w-full items-center">
+    <div className="flex flex-col w-full items-center mt-5">
       <div className="flex justify-start w-[80%]">
         <label className="text-neutral-600 font-medium pl-1">{label}</label>
       </div>
