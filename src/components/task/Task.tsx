@@ -6,6 +6,7 @@ import Desc from "./Desc";
 import Footer from "./Footer";
 import Priority from "./Priority";
 import { PriorityLevel } from "@/interface/priority";
+import StatusText from "./StatusText";
 import { Status } from "@/interface/status";
 
 export type TaskProps = {
@@ -44,6 +45,7 @@ export default function Task({
     >
       <div className="flex items-center">
         <Priority priority={priority} />
+        <StatusText status={status} />
         <div className="flex items-center space-x-1 ml-auto mr-1">
           <Dnd onDragStart={handleDragStart} />
           <Edit id={id} />
