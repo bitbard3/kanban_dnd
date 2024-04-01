@@ -51,8 +51,8 @@ export default function Task({
           <Edit id={id} />
         </div>
       </div>
-      <Title title={title} />
-      <Desc description={description} />
+      <Title status={status} title={title} />
+      <Desc status={status} description={description} />
       <Footer date={date} assignee={assignee} />
     </div>
   );
